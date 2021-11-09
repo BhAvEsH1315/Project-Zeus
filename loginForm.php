@@ -15,10 +15,10 @@
           <input type="text" id="User" name="User" class="un" placeholder="Username"><br>
 
           <label for="Pass"></label><br>
-          <input type = "text" id = "Pass" name="Pass" class="pass" placeholder="Password"><br>
+          <input type = "password" id = "Pass" name="Pass" class="pass" placeholder="Password"><br>
 
           <label for="car"> </label><br>
-          <input type = "text" id = "car" name="car" class="carno" placeholder="Car Number"><br>
+          <input type = "number" id = "car" name="car" class="carno" placeholder="Car Number"><br>
 
           <!-- <input type="submit" value="Login"> -->
           <input class="submit" type="submit" align="center"></input>

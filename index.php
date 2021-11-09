@@ -80,56 +80,95 @@ else
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="Homepage.css">
-
-        <title>Home Page</title>
-        <style>
-        th, p {text-align: left;}
+        <title>
+            Toll Plaza website
+        </title>
+        <style type="text/css">
         body {
-              font-family: Arial, Helvetica, sans-serif;
+            height: 125vh;
+            margin-top: 0px;
+            padding: 4px;
+            background-color: #112D32;
+            font-family: sans-serif;
+            background-image: url(A1.jpg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: 0px;
+        }
+    
+            ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+              background-color: #112D32;
             }
+            
+            li {
+              float: left;
+            }
+            
+            li a {
+              display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 18px;
+              text-decoration: none;
+            }
+            
 
-    </style>
+            li a:hover:not(.active) {
+                background-color: #4F4A41;
+              }
+              
+              .active {
+                background-color: #254E58;
+              }
 
+            </style>
+
+
+        </style>
     </head>
 
     <body>
-        <font color="white">
+
         <header>
-        <h1>Welcome to Toll Plaza!!</h1>
-
-        <p>Please select one option to continue: </p><br>
-
-        </header>
-
-
-        <section>
             <nav>
-            <div> <h3>Create an account: </h3>
-            <form action="SignupForm.php">
-            <button type = "submit">Sign up</button>
-        </form>
-        </div>
+                <ul>
+                    <li>
+                        <a href="index.php"> &nbsp; &nbsp; Home &nbsp; &nbsp;   </a>
+                    </li>
+                    <li>
+                        <a href="Userguide.html">&nbsp; &nbsp; Documentation    &nbsp; &nbsp;    </a>
+                    </li>
+                    <li>
+                        <a href="contactus.html">&nbsp; &nbsp; Contact us   &nbsp; &nbsp;    </a>
+                    </li>
+                    <li>
+                        <a href="SignupForm.php">&nbsp; &nbsp; Sign Up   &nbsp; &nbsp;    </a>
+                    </li>
+                    <li>
+                        <a href="loginForm.php">&nbsp; &nbsp; Sign In  &nbsp; &nbsp;    </a>
+                    </li>
+                    <li>
+                        <a href="adminform.php">&nbsp; &nbsp; Administrator &nbsp; &nbsp;    </a>
+                    </li>
+                
+                </ul>
             </nav>
-        </section><br>
-        <article>
-        <div> <h3>login to your account: </h3>
-        <form action="loginForm.php">
-            <button type = "submit">Sign in</button>
-        </form>
-        </div>
+        </header><font color="white">
+     
 
-        <div>
-            <h3>Login as administrator : </h3>
-            <form action="adminform.php">
-            <button type = "submit">Sign in</button>
-        </form>
-        </div>
-        </article>
-        </font>
+
+       
+
+      
+
+     
+    </font>
     </body>
 </html>
-
-

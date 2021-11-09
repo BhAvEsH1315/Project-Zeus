@@ -18,8 +18,16 @@ if($conn->connect_error)
 
 if($admin == "admin" && $pass == "abcd")
 {
-     echo "Administrator name and Password authenticated.";
-     echo "<br> Please <a href='adminproceed.php'>click here</a> to continue.";
+    echo "<script>
+alert('Username and password authenticated');
+window.location.href='adminproceed.php';  
+</script>";
+}
+else {
+    echo "<script>
+alert('Username or password incorrect');
+window.location.href='adminform.php';  
+</script>";
 }
 
 

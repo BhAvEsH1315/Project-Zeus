@@ -1,68 +1,125 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-session_start();
-$user = $_SESSION['user'];
-$pass = $_SESSION['pass'];
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            align-content: center;
+        }
 
-$hostname = "localhost";
-$Username = "root";
-$Password = "";
-$dbname = "Plaza";
+        .container {
+            background-color: #254e58;
+            width: 80%;
+            height: 800px;
+            align-self: center;
+            margin: 3em auto;
+        }
 
-$conn = mysqli_connect($hostname, $Username, $Password, $dbname );
+        .text {
+            width: 70%;
+            height: 400px;
+            background-color: antiquewhite;
+            margin: 2em auto;
+            border-radius: 0.7cm;
+            text-align: center;
+            font-size: 50px;
+        }
 
-if($conn->connect_error)
-{
-    die("<br>Connection failed: ". $conn->connect_error);
-}
+        p {
+            padding-top: 20px;
+        }
 
-$sql1 = "SELECT eWallet_balance FROM Users WHERE UserName = '$user' and Pass = '$pass'";
+        .submit {
+            width: 40%;
+            height: 80px;
+            cursor: pointer;
+            border-radius: 5em;
+            color: #fff;
+            background: linear-gradient(to right, #254e58, #112d32);
+            border: 0;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            font-family: system-ui;
+            margin-left: 35%;
+            font-size: 28px;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.404);
+            margin: 0.8em auto;
+        }
+    </style>
+</head>
 
-$result = $conn->query($sql1);
+<body style="background-color:#4f4a41;">
+    <?php
 
-$row = $result->fetch_assoc();
+    session_start();
+    $user = $_SESSION['user'];
+    $pass = $_SESSION['pass'];
 
-$eWall_bal = $row['eWallet_balance'];
+    $hostname = "localhost";
+    $Username = "root";
+    $Password = "";
+    $dbname = "Plaza";
 
-if($eWall_bal > 150)
-{
-    $eWall_bal = $eWall_bal - 150;
+    $conn = mysqli_connect($hostname, $Username, $Password, $dbname);
 
-    $sql2 = "UPDATE Users SET eWallet_balance = '$eWall_bal' WHERE UserName = '$user' and Pass = '$pass' ";
+    if ($conn->connect_error) {
+        die("<br>Connection failed: " . $conn->connect_error);
+    }
 
-    $conn->query($sql2);
+    $sql1 = "SELECT eWallet_balance FROM Users WHERE UserName = '$user' and Pass = '$pass'";
 
-    // echo $conn->error;
-    $res = "Successful";
-    $day = date('D', time());
-    $time = date('Y-m-d H:i:s', time());
+    $result = $conn->query($sql1);
 
+    $row = $result->fetch_assoc();
 
-    $sql4 = "INSERT INTO Transactions(User, Dayy, ExactTime, Result, CurrentIncome) VALUES('$user', '$day', '$time', '$res', 150)";
+    $eWall_bal = $row['eWallet_balance'];
 
-    $conn->query($sql4);
+    if ($eWall_bal >= 150) {
+        $eWall_bal = $eWall_bal - 150;
 
-    // echo $conn->error;
+        $sql2 = "UPDATE Users SET eWallet_balance = '$eWall_bal' WHERE UserName = '$user' and Pass = '$pass' ";
 
-    echo "Transaction Successful. You may pass through the toll plaza. Happy Journey :))";
-    echo "<form action='index.php'><button>Back to Homepage</button></form>";
-}
+        $conn->query($sql2);
 
-else
-{
-    echo "You do not have enough balance in your eWallet for the transaction. Minimum required balance is 150 Rupees.";
-
-
-    // echo $conn->error;
-    $res = "Failed";
-    $day = date('D', time());
-    $time = date('Y-m-d H:i:s', time());
+        // echo $conn->error;
+        $res = "Successful";
+        // $day = date('D', time());
+        $time = date('Y-m-d H:i:s', time());
 
 
-    $sql4 = "INSERT INTO Transactions(User, Dayy, ExactTime, Result, CurrentIncome) VALUES('$user', '$day', '$time', '$res', 0)";
+        $sql4 = "INSERT INTO Transactions(User, ExactTime, Result, CurrentIncome) VALUES('$user', '$time', '$res', 150)";
 
-    $conn->query($sql4);
+        $conn->query($sql4);
 
-}
+        // echo $conn->error;
 
-?>
+        echo "<div class='container'><div class='text'><p>!!! Transaction Successful !!!<br>!! Happy Journey..!!<p>
+        <form action='index.php'><button class='submit'>Back to Homepage</button></form></div></div>";
+    } else {
+        //  echo "You do not have enough balance in your eWallet for the transaction. Minimum required balance is 150 Rupees.";
+        echo "<script>
+    alert('You do not have enough balance in your eWallet for the transaction. Minimum required balance is 150 Rupees.');
+    window.location.href='loginProceed.php';  
+    </script>";
+
+        // echo $conn->error;
+        $res = "Failed";
+        // $day = date('D', time());
+        $time = date('Y-m-d H:i:s', time());
+
+
+        $sql4 = "INSERT INTO Transactions(User, ExactTime, Result, CurrentIncome) VALUES('$user', '$time', '$res', 0)";
+
+        $conn->query($sql4);
+    }
+
+    ?>
+</body>
+
+</html>

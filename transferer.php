@@ -77,14 +77,21 @@ if((int)$amount < (int)$balance)
 
     // echo $conn_plaza->error;
 
-    echo "Money Transfer successful";
+
+    echo "<script>
+alert('Money Transfer successful');
+window.location.href='loginProceed.php';  
+</script>";
 
 
 }
 
 else
 {
-    echo "<center>Sorry, your account balance is not enough. Money transfer aborted.</center>";
+    echo "<script>
+alert('Sorry, your account balance is not enough. Money transfer aborted.');
+window.location.href='creditcheck.php';  
+</script>";
 }
 
 ?>
